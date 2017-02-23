@@ -2,12 +2,12 @@
     "activities":{
         "-KdgTDDV6UsbEJO5vgp9":{"time":"YESTERDAYT21:45:46+0200","type":[":stew:"],"uid":"m6sLCDV1vChxXv4AgwkhFLaPMKh1"},
         "-KdgTDaXy5jy7LnDrYOE":{"time":"YESTERDAYT22:14:47+0200","type":[":droplet:"],"uid":"m6sLCDV1vChxXv4AgwkhFLaPMKh1"},
-        "-KddOXncbD50V4AP6Exr":{"time":"2017-02-23T07:16:28+0200","type":[":droplet:"],"uid":"3LcjzjiHz5e3Vqc9TOdtRGr6Ino2"},
-        "-KddQII02lDEMV6L-eJL":{"time":"2017-02-23T07:24:09+0200","type":[":stew:"],"uid":"m6sLCDV1vChxXv4AgwkhFLaPMKh1"},
-        "-KddfwU3An5rpmCd8ljz":{"time":"2017-02-23T08:43:17+0200","type":[":shit:",":droplet:"],"uid":"FsXV0ryUaNgYLfbWx0n1CxAXM9d2"},
-        "-KdfIpUSCcZXAEn55SDN":{"time":"2017-02-23T16:17:07+0200","type":[":droplet:",":shit:"],"uid":"m6sLCDV1vChxXv4AgwkhFLaPMKh1"},
-        "-KdfUx9iXlIkWBDVzS7e":{"time":"2017-02-23T16:56:00+0200","type":[":stew:"],"uid":"m6sLCDV1vChxXv4AgwkhFLaPMKh1"},
-        "-KdgRqgPJU0N2_px9QIp": {"time": "2017-02-23T17:29:47+0200","type": [":tennis:"],"uid": "3LcjzjiHz5e3Vqc9TOdtRGr6Ino2"}
+        "-KddOXncbD50V4AP6Exr":{"time":"TODAYT07:16:28+0200","type":[":droplet:"],"uid":"3LcjzjiHz5e3Vqc9TOdtRGr6Ino2"},
+        "-KddQII02lDEMV6L-eJL":{"time":"TODAYT07:24:09+0200","type":[":stew:"],"uid":"m6sLCDV1vChxXv4AgwkhFLaPMKh1"},
+        "-KddfwU3An5rpmCd8ljz":{"time":"TODAYT08:43:17+0200","type":[":shit:",":droplet:"],"uid":"FsXV0ryUaNgYLfbWx0n1CxAXM9d2"},
+        "-KdfIpUSCcZXAEn55SDN":{"time":"TODAYT16:17:07+0200","type":[":droplet:",":shit:"],"uid":"m6sLCDV1vChxXv4AgwkhFLaPMKh1"},
+        "-KdfUx9iXlIkWBDVzS7e":{"time":"TODAYT16:56:00+0200","type":[":stew:"],"uid":"m6sLCDV1vChxXv4AgwkhFLaPMKh1"},
+        "-KdgRqgPJU0N2_px9QIp": {"time": "TODAYT17:29:47+0200","type": [":tennis:"],"uid": "3LcjzjiHz5e3Vqc9TOdtRGr6Ino2"}
     },
     "pet":{"name":"Dookie"}
 }
