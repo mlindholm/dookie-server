@@ -2,11 +2,11 @@ header {
     background-image: url(../img/landscape.png);
     background-position: bottom;
     background-repeat: repeat-x;
-    background-size: 100%;
+    background-size: auto 50%;
 }
 
 @media screen and (max-width: 30em){
     header {
-        background-size: 200%;
+        background-size: auto 25%;
     }
 }
