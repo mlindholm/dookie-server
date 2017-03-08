@@ -1,10 +1,11 @@
 {
   "rules": {
-    ".read": "auth != null",
-    ".write": "auth != null",
+    ".read": false,
+    ".write": false,
     "$uid": {
-        ".read": true,
-        ".write": "auth != null"
+      ".read": true,
+      ".write": "auth != null",
+      ".validate": "$uid.length == 20"
     }
   }
 }
