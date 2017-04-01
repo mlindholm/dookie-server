@@ -5,6 +5,12 @@ header {
     background-size: auto 50%;
 }
 
+@media screen and (max-width: 60em) and (min-width: 30em) {
+    header {
+        background-size: auto 37.5%;
+    }
+}
+
 @media screen and (max-width: 30em){
     header {
         background-size: auto 25%;
