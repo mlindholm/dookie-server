@@ -4,10 +4,8 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
-exports.removeOldActivities = functions.database.ref('/{petId}/online').onWrite(event => {
-    const parentRef = event.data.ref.parent;
-    const activitiesRef = parentRef.parent.child('activities');
-
+exports.removeOldActivities = functions.database.ref('/{petId}/online/{uid}').onWrite(event => {
+    const activitiesRef = admin.database().ref(`/${event.params.petId}/activities`);
     return activitiesRef.once('value').then(snapshot => {
         const toBeRemoved = {};
         snapshot.forEach(function(child) {
