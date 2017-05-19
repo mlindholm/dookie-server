@@ -1,13 +1,13 @@
 {
-    "activities":{
-        "-KdgTDDV6UsbEJO5vgp9":{"time":"YESTERDAYT21:45:46+0200","type":[":stew:"],"uid":"xxxxxxxxxxxxxxxxxxxx"},
-        "-KdgTDaXy5jy7LnDrYOE":{"time":"YESTERDAYT22:14:47+0200","type":[":droplet:"],"uid":""},
-        "-KddOXncbD50V4AP6Exr":{"time":"TODAYT07:16:28+0200","type":[":droplet:"],"uid":"xxxxxxxxxxxxxxxxxxxx"},
-        "-KddQII02lDEMV6L-eJL":{"time":"TODAYT07:24:09+0200","type":[":stew:"],"uid":""},
-        "-KddfwU3An5rpmCd8ljz":{"time":"TODAYT08:43:17+0200","type":[":shit:",":droplet:"],"uid":"xxxxxxxxxxxxxxxxxxxx"},
-        "-KdfIpUSCcZXAEn55SDN":{"time":"TODAYT16:17:07+0200","type":[":droplet:",":shit:"],"uid":""},
-        "-KdfUx9iXlIkWBDVzS7e":{"time":"TODAYT16:56:00+0200","type":[":stew:"],"uid":""},
-        "-KdgRqgPJU0N2_px9QIp": {"time": "TODAYT17:29:47+0200","type": [":tennis:"],"uid": "xxxxxxxxxxxxxxxxxxxx"}
+    "activities" : {
+        "-KdgTDDV6UsbEJO5vgp9" : {"date" : "YESTERDAYT21:45:46+0200", "type" : [":stew:"], "uid" : "xxxxxxxxxxxxxxxxxxxx"},
+        "-KdgTDaXy5jy7LnDrYOE" : {"date" : "YESTERDAYT22:14:47+0200", "type" : [":droplet:"], "uid" : ""},
+        "-KddOXncbD50V4AP6Exr" : {"date" : "TODAYT07:16:28+0200", "type" : [":droplet:"], "uid" : "xxxxxxxxxxxxxxxxxxxx"},
+        "-KddQII02lDEMV6L-eJL" : {"date" : "TODAYT07:24:09+0200", "type" : [":stew:"], "uid" : ""},
+        "-KddfwU3An5rpmCd8ljz" : {"date" : "TODAYT08:43:17+0200", "type" : [":shit:", ":droplet:"], "uid" : "xxxxxxxxxxxxxxxxxxxx"},
+        "-KdfIpUSCcZXAEn55SDN" : {"date" : "TODAYT16:17:07+0200", "type" : [":droplet:", ":shit:"], "uid" : ""},
+        "-KdfUx9iXlIkWBDVzS7e" : {"date" : "TODAYT16:56:00+0200", "type" : [":stew:"], "uid" : ""},
+        "-KdgRqgPJU0N2_px9QIp" : {"date" : "TODAYT17:29:47+0200", "type" : [":tennis:"], "uid" : "xxxxxxxxxxxxxxxxxxxx"}
     },
-    "pet":{"name":"Dookie", "emoji":":dog:"}
+    "pet" : {"name" : "Dookie", "emoji" : ":dog:", "buttons" : [ ":smiley:", ":droplet:", ":poop:" ], "merge" : [ ":droplet:", ":poop:" ]}
 }
