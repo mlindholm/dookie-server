@@ -3,9 +3,26 @@
     ".read": false,
     ".write": false,
     "$uid": {
-      ".read": true,
+      ".read": "auth != null",
       ".write": "auth != null",
       ".validate": "$uid.length == 20"
+    },
+    "activities": {
+      ".read": "auth != null",
+      ".write": "auth != null",
+      ".indexOn": "pid"
+    },
+    "pets": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "userPets": {
+      ".read": "auth != null",
+      ".write": "auth != null"
+    },
+    "users": {
+      ".read": "auth != null",
+      ".write": "auth != null"
     }
   }
 }
