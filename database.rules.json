@@ -3,25 +3,25 @@
     ".read": false,
     ".write": false,
     "$uid": {
-      ".read": "auth != null",
+      ".read": true,
       ".write": "auth != null",
       ".validate": "$uid.length == 20"
     },
     "activities": {
-      ".read": "auth != null",
+      ".read": true,
       ".write": "auth != null",
       ".indexOn": "pid"
     },
     "pets": {
-      ".read": "auth != null",
+      ".read": true,
       ".write": "auth != null"
     },
     "userPets": {
-      ".read": "auth != null",
+      ".read": true,
       ".write": "auth != null"
     },
     "users": {
-      ".read": "auth != null",
+      ".read": true,
       ".write": "auth != null"
     }
   }
