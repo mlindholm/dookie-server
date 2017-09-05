@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Dookie</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.8.1/tachyons.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/css/basic/emojify.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/css/data-uri/emojify.min.css" />
+  </head>
+  <body class="sans-serif dark-gray lh-title">
+    <div id="login" class="dn">
+      <div class="pa5 mw6 center tc">
+        <h2 class="f3 mb0">Log in to Dookie</h2>
+        <div class="mv4">
+          <input type="text" name="pid" id="pid" class="tc pa2 input-reset ba b--silver bg-white w-100 br1" placeholder="Pet ID, eg. -Kmjxftc7x6Vok0UjYk7">
+          <input class="mt3 ph3 pv2 input-reset ba b--transparent bg-blue white dim pointer f5 fw7 br-pill w-100" type="submit" value="Log in" onclick="login()">
+        </div>
+        <p class="f6 silver">You can find the pet ID it from the app‘s settings page or from the email you might have received.</p>
+      </div>
+    </div>
+    <div id="logged-in" class="dn">
+      <header id="header" class="bb b--light-gray">
+        <div class="flex items-center h3 ph3 mw6 center">
+          <div id="icon"></div>
+          <h2 id="name" class="f3 mv0"></h2>
+          <a href="" class="f6 link dim br-pill ba ph3 pv2 silver ml-auto" onclick="logout()">Logout</a>
+        </div>
+      </header>
+      <section id="content" class="pa3 mw6 center">
+        <div id="today" class="mt3">
+          <h2 class="f5 fw6 mt0">Today</h2>
+          <p class="silver">Fetching activities…</p>
+        </div>
+        <div id="yesterday" class="mt3">
+          <h2 class="f5 fw6 mt0">Yesterday</h2>
+          <p class="silver">Fetching activities…</p>
+        </div>
+      </section>
+    </div>
+    <footer class="f6 silver tc pv4">
+        &copy; <script type="text/javascript">document.write(new Date().getFullYear())</script>
+        <a href="http://mathiaslindholm.com/" class="link silver">Mathias Lindholm</a>
+        <a href="mailto:mathias.lindholm@gmail.com?subject=Dookie" class="link silver ph3">Contact</a>
+        <a href="../legal.html" class="link silver">Legal</a>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/js/emojify.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-database.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
