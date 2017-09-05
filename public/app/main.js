@@ -17,9 +17,9 @@ const loginContent = document.getElementById('login')
 const loggedInContent = document.getElementById('logged-in')
 const language = window.navigator.userLanguage || window.navigator.language
 const ref = firebase.database().ref()
-const pid = readCookie('pid')
+const petId = readCookie('petId')
 
-if (pid) {
+if (petId) {
   console.log('logged in')
   showContent()
   fetchData()
@@ -29,22 +29,22 @@ if (pid) {
 }
 
 function login() {
-  var inputValue = document.getElementById('pid').value
-  checkValidPid(inputValue)
+  var inputValue = document.getElementById('inputPetId').value
+  checkValidPetId(inputValue)
 }
 
 function logout() {
-  eraseCookie('pid')
+  eraseCookie('petId')
   location.reload()
 }
 
-function checkValidPid(pid) {
-  if (pid !== '') {
-    ref.child('pets/' + pid).once('value').then(function(snapshot) {
-      var pet = snapshot.val()
-      if (pet) {
+function checkValidPetId(id) {
+  if (id !== '') {
+    ref.child('pets/' + id).once('value').then(function(snapshot) {
+      var data = snapshot.val()
+      if (data) {
         console.log('pet exists')
-        createCookie('pid', pid, 365)
+        createCookie('petId', id, 365)
         location.reload()
       } else {
         console.log('pet does not exists')
@@ -76,9 +76,9 @@ function showEmptyMessage(id) {
 
 function fetchData() {
   var activityRef = ref.child('activities')
-  var petRef = ref.child('pets/' + pid)
+  var petRef = ref.child('pets/' + petId)
 
-  activityRef.orderByChild('pid').equalTo(pid).limitToLast(20).once('value').then(function(snapshot) {
+  activityRef.orderByChild('pid').equalTo(petId).limitToLast(20).once('value').then(function(snapshot) {
     var array = []
     snapshot.forEach(function(child) {
       array.push(child.val())
