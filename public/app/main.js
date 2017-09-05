@@ -48,7 +48,7 @@ function checkValidPid(pid) {
         location.reload()
       } else {
         console.log('pet does not exists')
-        alert('This pet doesn‘t exist, check that you‘ve typed the pet ID correctly.')
+        alert('The pet ID you entered doesn’t match any existing pet. Please check that you’ve entered the pet ID correctly.')
       }
     })
   }
