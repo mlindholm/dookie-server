@@ -17,35 +17,36 @@ const loginContent = document.getElementById('login')
 const loggedInContent = document.getElementById('logged-in')
 const language = window.navigator.userLanguage || window.navigator.language
 const ref = firebase.database().ref()
-const petId = readCookie('petId')
 
-if (petId) {
-  console.log('logged in')
-  showContent()
-  fetchData()
+if (docCookies.hasItem('petId')) {
+  console.log('has cookie, logging in')
+  var petId = docCookies.getItem('petId')
+  checkValidPetId(petId)
 } else {
   console.log('not logged in')
   showLogin()
 }
 
 function login() {
-  var inputValue = document.getElementById('inputPetId').value
-  checkValidPetId(inputValue)
+  var value = document.getElementById('inputPetId').value
+  var res = encodeURIComponent(value)
+  checkValidPetId(value)
 }
 
 function logout() {
-  eraseCookie('petId')
-  location.reload()
+  docCookies.removeItem('petId')
+  showLogin()
 }
 
 function checkValidPetId(id) {
   if (id !== '') {
-    ref.child('pets/' + id).once('value').then(function(snapshot) {
+    ref.child('pets').child(id).once('value').then(function(snapshot) {
       var data = snapshot.val()
       if (data) {
         console.log('pet exists')
-        createCookie('petId', id, 365)
-        location.reload()
+        docCookies.setItem('petId', id)
+        showContent()
+        fetchData()
       } else {
         console.log('pet does not exists')
         alert('The pet ID you entered doesn’t match any existing pet. Please check that you’ve entered the pet ID correctly.')
@@ -55,6 +56,7 @@ function checkValidPetId(id) {
 }
 
 function fetchData() {
+  var petId = docCookies.getItem('petId')
   var activityRef = ref.child('activities')
   var petRef = ref.child('pets/' + petId)
 
@@ -137,29 +139,4 @@ function hideLoadingMessage(id) {
 function showEmptyMessage(id) {
   var container = document.getElementById(id)
   container.getElementsByClassName('silver')[0].innerText = 'No activities'
-}
-
-function createCookie(name,value,days) {
-  var expires = '';
-  if (days) {
-    var date = new Date();
-    date.setTime(date.getTime() + (days*24*60*60*1000));
-    expires = '; expires=' + date.toUTCString();
-  }
-  document.cookie = name + '=' + value + expires + '; path=/';
-}
-
-function readCookie(name) {
-  var nameEQ = name + '=';
-  var ca = document.cookie.split(';');
-  for(var i=0;i < ca.length;i++) {
-    var c = ca[i];
-    while (c.charAt(0)==' ') c = c.substring(1,c.length);
-    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-  }
-  return null;
-}
-
-function eraseCookie(name) {
-  createCookie(name,'',-1);
 }
