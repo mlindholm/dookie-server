@@ -117,7 +117,7 @@ function addActivityElement(date, type, id) {
   var options = { hour12: false, hour: 'numeric', minute: 'numeric' }
   var timeString = date.toLocaleTimeString(language, options)
   var emoji = emojify.replace(type.toString().replace(/\,/g,''))
-  activity.className = 'pv2 flex items-center'
+  activity.className = 'pv3 flex items-center'
   activity.innerHTML = '<div class="time w3"></div><div class="emojis"></div>'
   activity.getElementsByClassName('time')[0].innerText = timeString
   activity.getElementsByClassName('emojis')[0].innerHTML = emoji
