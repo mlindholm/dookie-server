@@ -77,17 +77,12 @@ function fetchData() {
 }
 
 function sortActivitiesByDay(array) {
-  var fixDatesArray = array.map(function(child) {
-    var isoDate = child.date.slice(0, -2) + ':' + child.date.slice(-2)
-    child.date = isoDate
-    return child
-  })
-  var todayArray = fixDatesArray.filter(function(child) {
+  var todayArray = array.filter(function(child) {
     var today = new Date()
     var childDate = new Date(child.date)
     return childDate.setHours(0,0,0,0) === today.setHours(0,0,0,0)
   })
-  var yesterdayArray = fixDatesArray.filter(function(child) {
+  var yesterdayArray = array.filter(function(child) {
     var yesterday = new Date(Date.now() - 86400000)
     var childDate = new Date(child.date)
     return childDate.setHours(0,0,0,0) === yesterday.setHours(0,0,0,0)
