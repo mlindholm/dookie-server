@@ -54,26 +54,6 @@ function checkValidPetId(id) {
   }
 }
 
-function showLogin() {
-  loginContent.className = 'db'
-  loggedInContent.className = 'dn'
-}
-
-function showContent() {
-  loginContent.className = 'dn'
-  loggedInContent.className = 'db'
-}
-
-function hideLoadingMessage(id) {
-  var container = document.getElementById(id)
-  container.getElementsByClassName('silver')[0].className += ' dn'
-}
-
-function showEmptyMessage(id) {
-  var container = document.getElementById(id)
-  container.getElementsByClassName('silver')[0].innerText = 'No activities'
-}
-
 function fetchData() {
   var activityRef = ref.child('activities')
   var petRef = ref.child('pets/' + petId)
@@ -97,12 +77,17 @@ function fetchData() {
 }
 
 function sortActivitiesByDay(array) {
-  var todayArray = array.filter(function(child) {
+  var fixDatesArray = array.map(function(child) {
+    var isoDate = child.date.slice(0, -2) + ':' + child.date.slice(-2)
+    child.date = isoDate
+    return child
+  })
+  var todayArray = fixDatesArray.filter(function(child) {
     var today = new Date()
     var childDate = new Date(child.date)
     return childDate.setHours(0,0,0,0) === today.setHours(0,0,0,0)
   })
-  var yesterdayArray = array.filter(function(child) {
+  var yesterdayArray = fixDatesArray.filter(function(child) {
     var yesterday = new Date(Date.now() - 86400000)
     var childDate = new Date(child.date)
     return childDate.setHours(0,0,0,0) === yesterday.setHours(0,0,0,0)
@@ -137,6 +122,26 @@ function addActivityElement(date, type, id) {
   activity.getElementsByClassName('time')[0].innerText = timeString
   activity.getElementsByClassName('emojis')[0].innerHTML = emoji
   container.appendChild(activity)
+}
+
+function showLogin() {
+  loginContent.className = 'db'
+  loggedInContent.className = 'dn'
+}
+
+function showContent() {
+  loginContent.className = 'dn'
+  loggedInContent.className = 'db'
+}
+
+function hideLoadingMessage(id) {
+  var container = document.getElementById(id)
+  container.getElementsByClassName('silver')[0].className += ' dn'
+}
+
+function showEmptyMessage(id) {
+  var container = document.getElementById(id)
+  container.getElementsByClassName('silver')[0].innerText = 'No activities'
 }
 
 function createCookie(name,value,days) {
