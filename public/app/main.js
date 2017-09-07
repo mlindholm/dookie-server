@@ -19,11 +19,9 @@ const language = window.navigator.userLanguage || window.navigator.language
 const ref = firebase.database().ref()
 
 if (docCookies.hasItem('petId')) {
-  console.log('has cookie, logging in')
   var petId = docCookies.getItem('petId')
   checkValidPetId(petId)
 } else {
-  console.log('not logged in')
   showLogin()
 }
 
@@ -40,15 +38,13 @@ function logout() {
 
 function checkValidPetId(id) {
   if (id !== '') {
-    ref.child('pets').child(id).once('value').then(function(snapshot) {
+    ref.child('pets').child(id).once('value').then(snapshot => {
       var data = snapshot.val()
       if (data) {
-        console.log('pet exists')
         docCookies.setItem('petId', id)
         showContent()
         fetchData()
       } else {
-        console.log('pet does not exists')
         alert('The pet ID you entered doesn’t match any existing pet. Please check that you’ve entered the pet ID correctly.')
       }
     })
@@ -60,15 +56,15 @@ function fetchData() {
   var activityRef = ref.child('activities')
   var petRef = ref.child('pets/' + petId)
 
-  activityRef.orderByChild('pid').equalTo(petId).limitToLast(20).once('value').then(function(snapshot) {
+  activityRef.orderByChild('pid').equalTo(petId).limitToLast(20).once('value', snapshot => {
     var array = []
-    snapshot.forEach(function(child) {
+    snapshot.forEach(child => {
       array.push(child.val())
     })
     sortActivitiesByDay(array.reverse())
   })
 
-  petRef.once('value').then(function(snapshot) {
+  petRef.once('value',snapshot => {
     var data = snapshot.val()
     var name = document.getElementById('name')
     var icon = document.getElementById('icon')
@@ -79,22 +75,20 @@ function fetchData() {
 }
 
 function sortActivitiesByDay(array) {
-  var sortedArray = array.sort(function(a, b) {
-    return new Date(b.date).getTime() - new Date(a.date).getTime()
-  })
-  var todayArray = sortedArray.filter(function(child) {
+  var sortedArray = array.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  var todayArray = sortedArray.filter(child => {
     var today = new Date()
     var childDate = new Date(child.date)
     return childDate.setHours(0,0,0,0) === today.setHours(0,0,0,0)
   })
-  var yesterdayArray = sortedArray.filter(function(child) {
+  var yesterdayArray = sortedArray.filter(child => {
     var yesterday = new Date(Date.now() - 86400000)
     var childDate = new Date(child.date)
     return childDate.setHours(0,0,0,0) === yesterday.setHours(0,0,0,0)
   })
   if (todayArray.length > 0) {
     hideLoadingMessage('today')
-    todayArray.forEach(function(child) {
+    todayArray.forEach(child => {
       addActivityElement(child.date, child.type, 'today')
     })
   } else {
@@ -102,7 +96,7 @@ function sortActivitiesByDay(array) {
   }
   if (yesterdayArray.length > 0) {
     hideLoadingMessage('yesterday')
-    yesterdayArray.forEach(function(child) {
+    yesterdayArray.forEach(child => {
       addActivityElement(child.date, child.type, 'yesterday')
     })
   } else {
