@@ -79,12 +79,15 @@ function fetchData() {
 }
 
 function sortActivitiesByDay(array) {
-  var todayArray = array.filter(function(child) {
+  var sortedArray = array.sort(function(a, b) {
+    return new Date(b.date).getTime() - new Date(a.date).getTime()
+  })
+  var todayArray = sortedArray.filter(function(child) {
     var today = new Date()
     var childDate = new Date(child.date)
     return childDate.setHours(0,0,0,0) === today.setHours(0,0,0,0)
   })
-  var yesterdayArray = array.filter(function(child) {
+  var yesterdayArray = sortedArray.filter(function(child) {
     var yesterday = new Date(Date.now() - 86400000)
     var childDate = new Date(child.date)
     return childDate.setHours(0,0,0,0) === yesterday.setHours(0,0,0,0)
