@@ -114,10 +114,8 @@ function addActivityElement(date, type, id) {
 }
 
 function clearActivities() {
-  var lists = ['today-list', 'yesterday-list']
-  lists.forEach(list => {
-    document.getElementById(list).innerHTML = ''
-  })
+  document.getElementById('today-list').innerHTML = ''
+  document.getElementById('yesterday-list').innerHTML = ''
 }
 
 function showLogin() {
