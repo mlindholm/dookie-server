@@ -20,6 +20,7 @@ const ref = firebase.database().ref()
 
 if (docCookies.hasItem('petId')) {
   var petId = docCookies.getItem('petId')
+  showContent()
   checkValidPetId(petId)
 } else {
   showLogin()
@@ -33,6 +34,7 @@ function login() {
 
 function logout() {
   docCookies.removeItem('petId')
+  clearActivities()
   showLogin()
 }
 
@@ -46,6 +48,7 @@ function checkValidPetId(id) {
         fetchData()
       } else {
         alert('The pet ID you entered doesn’t match any existing pet. Please check that you’ve entered the pet ID correctly.')
+        showLogin()
       }
     })
   }
@@ -69,7 +72,7 @@ function fetchData() {
     var name = document.getElementById('name')
     var icon = document.getElementById('icon')
     name.innerText = data.name
-    icon.className = (data.emoji !== '') ? 'pr2' : ''
+    icon.className = (data.emoji !== '') ? 'mr2' : ''
     icon.innerHTML = emojify.replace(data.emoji)
   })
 }
@@ -86,26 +89,18 @@ function sortActivitiesByDay(array) {
     var childDate = new Date(child.date)
     return childDate.setHours(0,0,0,0) === yesterday.setHours(0,0,0,0)
   })
-  if (todayArray.length > 0) {
-    hideLoadingMessage('today')
-    todayArray.forEach(child => {
-      addActivityElement(child.date, child.type, 'today')
-    })
-  } else {
-    showEmptyMessage('today')
-  }
-  if (yesterdayArray.length > 0) {
-    hideLoadingMessage('yesterday')
-    yesterdayArray.forEach(child => {
-      addActivityElement(child.date, child.type, 'yesterday')
-    })
-  } else {
-    showEmptyMessage('yesterday')
-  }
+  todayArray.length === 0 ? showEmptyMessage('today') : hideLoadingMessage('today')
+  todayArray.forEach(child => {
+    addActivityElement(child.date, child.type, 'today')
+  })
+  yesterdayArray.length === 0 ? showEmptyMessage('yesterday') : hideLoadingMessage('yesterday')
+  yesterdayArray.forEach(child => {
+    addActivityElement(child.date, child.type, 'yesterday')
+  })
 }
 
 function addActivityElement(date, type, id) {
-  var container = document.getElementById(id)
+  var container = document.getElementById(id + '-list')
   var activity = document.createElement('div')
   var date = new Date(date)
   var options = { hour12: false, hour: 'numeric', minute: 'numeric' }
@@ -116,6 +111,13 @@ function addActivityElement(date, type, id) {
   activity.getElementsByClassName('time')[0].innerText = timeString
   activity.getElementsByClassName('emojis')[0].innerHTML = emoji
   container.appendChild(activity)
+}
+
+function clearActivities() {
+  var lists = ['today-list', 'yesterday-list']
+  lists.forEach(list => {
+    document.getElementById(list).innerHTML = ''
+  })
 }
 
 function showLogin() {
