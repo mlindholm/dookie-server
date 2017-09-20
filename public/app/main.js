@@ -130,10 +130,12 @@ function showContent() {
 
 function hideLoadingMessage(id) {
   var container = document.getElementById(id)
-  container.getElementsByClassName('silver')[0].className += ' dn'
+  container.getElementsByClassName('spinner-container')[0].classList.add('dn')
 }
 
 function showEmptyMessage(id) {
   var container = document.getElementById(id)
-  container.getElementsByClassName('silver')[0].innerText = 'No activities'
+  container.getElementsByClassName('spinner-container')[0].classList.remove('dn')
+  container.getElementsByClassName('spinner-image')[0].classList.add('dn')
+  container.getElementsByClassName('spinner-text')[0].innerText = 'No activities'
 }

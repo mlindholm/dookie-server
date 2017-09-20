@@ -35,11 +35,19 @@
       <section id="content" class="pa3 mw6 center">
         <div id="today" class="mt3">
           <h2 class="f5 fw6 mt0">Today</h2>
-          <p class="silver mb4">Fetching activities…</p>
+          <div class="spinner-container pb3">
+            <img src="loader.svg" class="spinner-image"/>
+            <span class="spinner-text silver mb4"></span>
+          </div>
+          <div id="today-list"></div>
         </div>
         <div id="yesterday" class="mt3">
           <h2 class="f5 fw6 mt0">Yesterday</h2>
-          <p class="silver mb4">Fetching activities…</p>
+          <div class="spinner-container pb3">
+            <img src="loader.svg" class="spinner-image"/>
+            <span class="spinner-text silver mb4"></span>
+          </div>
+          <div id="yesterday-list"></div>
         </div>
       </section>
     </div>
