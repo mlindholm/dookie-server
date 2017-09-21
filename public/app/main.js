@@ -48,6 +48,7 @@ function checkValidPetId(id) {
       var data = snapshot.val()
       if (data) {
         docCookies.setItem('petId', id)
+        window.history.replaceState({}, 'Dookie', '/app/');
         showContent()
         fetchData()
       } else {
