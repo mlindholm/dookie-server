@@ -13,7 +13,7 @@ emojify.setConfig({
   mode: 'data-uri'
 })
 
-const loginContent = document.getElementById('login')
+const loggedOutContent = document.getElementById('logged-out')
 const loggedInContent = document.getElementById('logged-in')
 const language = window.navigator.userLanguage || window.navigator.language
 const params = (new URL(document.location)).searchParams
@@ -128,12 +128,12 @@ function clearActivities() {
 }
 
 function showLogin() {
-  loginContent.className = 'db'
+  loggedOutContent.className = 'db'
   loggedInContent.className = 'dn'
 }
 
 function showContent() {
-  loginContent.className = 'dn'
+  loggedOutContent.className = 'dn'
   loggedInContent.className = 'db'
 }
 
