@@ -16,14 +16,18 @@ emojify.setConfig({
 const loginContent = document.getElementById('login')
 const loggedInContent = document.getElementById('logged-in')
 const language = window.navigator.userLanguage || window.navigator.language
+const params = (new URL(document.location)).searchParams
 const ref = firebase.database().ref()
 
-if (docCookies.hasItem('petId')) {
-  var petId = docCookies.getItem('petId')
-  showContent()
-  checkValidPetId(petId)
-} else {
-  showLogin()
+function init() {
+  if (docCookies.hasItem('petId')) {
+    let petId = docCookies.getItem('petId')
+    showContent()
+    fetchData()
+  } else {
+    let petId = params.get('petId')
+    petId ? checkValidPetId(petId) : showLogin()
+  }
 }
 
 function login() {
@@ -48,7 +52,7 @@ function checkValidPetId(id) {
         fetchData()
       } else {
         alert('The pet ID you entered doesn’t match any existing pet. Please check that you’ve entered the pet ID correctly.')
-        showLogin()
+        logout()
       }
     })
   }
@@ -59,15 +63,20 @@ function fetchData() {
   var activityRef = ref.child('activities')
   var petRef = ref.child('pets/' + petId)
 
-  activityRef.orderByChild('pid').equalTo(petId).limitToLast(20).once('value', snapshot => {
-    var array = []
-    snapshot.forEach(child => {
-      array.push(child.val())
-    })
-    sortActivitiesByDay(array.reverse())
+  activityRef.orderByChild('pid').equalTo(petId).limitToLast(20).once('value').then(snapshot => {
+    if (snapshot.val()) {
+      var array = []
+      snapshot.forEach(child => {
+        array.push(child.val())
+      })
+      sortActivitiesByDay(array.reverse())
+    } else {
+      alert('This pet doesn’t exist. Please check that you’ve entered the pet ID correctly.')
+      logout()
+    }
   })
 
-  petRef.once('value',snapshot => {
+  petRef.once('value').then(snapshot => {
     var data = snapshot.val()
     var name = document.getElementById('name')
     var icon = document.getElementById('icon')
@@ -139,3 +148,5 @@ function showEmptyMessage(id) {
   container.getElementsByClassName('spinner-image')[0].classList.add('dn')
   container.getElementsByClassName('spinner-text')[0].innerText = 'No activities'
 }
+
+init()
