@@ -20,20 +20,25 @@ const params = (new URL(document.location)).searchParams
 const ref = firebase.database().ref()
 
 function init() {
-  if (docCookies.hasItem('petId')) {
-    let petId = docCookies.getItem('petId')
+  const param = params.get('petId')
+  if (param) {
+    checkValidPet(param)
+  } else if (docCookies.hasItem('petId')) {
     showContent()
     fetchData()
   } else {
-    let petId = params.get('petId')
-    petId ? checkValidPetId(petId) : showLogin()
+    showLogin()
   }
 }
 
 function login() {
-  var value = document.getElementById('inputPetId').value
-  var res = encodeURIComponent(value)
-  checkValidPetId(value)
+  const value = document.getElementById('inputPetId').value
+  const res = encodeURIComponent(value)
+  if (isFirebasePushId(res)) {
+    checkValidPet(res)
+  } else {
+    alert('This is not a valid pet ID. Please check that you’ve entered it correctly.')
+  }
 }
 
 function logout() {
@@ -42,39 +47,41 @@ function logout() {
   showLogin()
 }
 
-function checkValidPetId(id) {
-  if (id !== '') {
-    ref.child('pets').child(id).once('value').then(snapshot => {
-      var data = snapshot.val()
-      if (data) {
-        docCookies.setItem('petId', id)
-        window.history.replaceState({}, 'Dookie', '/app/');
-        showContent()
-        fetchData()
-      } else {
-        alert('The pet ID you entered doesn’t match any existing pet. Please check that you’ve entered the pet ID correctly.')
-        logout()
-      }
-    })
+function isFirebasePushId(id) {
+  if (id.match('[^-_\a-z0-9]') && id.length === 20) {
+    return true
+  } else {
+    return false
   }
 }
 
-function fetchData() {
-  var petId = docCookies.getItem('petId')
-  var activityRef = ref.child('activities')
-  var petRef = ref.child('pets/' + petId)
-
-  activityRef.orderByChild('pid').equalTo(petId).limitToLast(20).once('value').then(snapshot => {
-    if (snapshot.val()) {
-      var array = []
-      snapshot.forEach(child => {
-        array.push(child.val())
-      })
-      sortActivitiesByDay(array.reverse())
+function checkValidPet(id) {
+  ref.child('pets').child(id).once('value').then(snapshot => {
+    const data = snapshot.val()
+    if (data) {
+      docCookies.setItem('petId', id)
+      showContent()
+      fetchData()
     } else {
-      alert('This pet doesn’t exist. Please check that you’ve entered the pet ID correctly.')
+      alert('Couldn’t find any pets matching this ID. Please check that you’ve entered it correctly.')
       logout()
     }
+  })
+}
+
+function fetchData() {
+  const petId = docCookies.getItem('petId')
+  const activityRef = ref.child('activities')
+  const petRef = ref.child('pets/' + petId)
+
+  window.history.replaceState({}, 'Dookie', '/app/');
+
+  activityRef.orderByChild('pid').equalTo(petId).limitToLast(20).once('value').then(snapshot => {
+    var array = []
+    snapshot.forEach(child => {
+      array.push(child.val())
+    })
+    sortActivitiesByDay(array)
   })
 
   petRef.once('value').then(snapshot => {
@@ -84,6 +91,9 @@ function fetchData() {
     name.innerText = data.name
     icon.className = (data.emoji !== '') ? 'mr2' : ''
     icon.innerHTML = emojify.replace(data.emoji)
+  petRef.once('child_removed').then(() => {
+    alert('It seems that your pet has been deleted. You can recreate it using the app.')
+    logout()
   })
 }
 
