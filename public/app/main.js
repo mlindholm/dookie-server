@@ -85,12 +85,13 @@ function fetchData() {
   })
 
   petRef.once('value').then(snapshot => {
-    var data = snapshot.val()
-    var name = document.getElementById('name')
-    var icon = document.getElementById('icon')
+    const data = snapshot.val()
+    const name = document.getElementById('name')
+    const icon = document.getElementById('icon')
     name.innerText = data.name
-    icon.className = (data.emoji !== '') ? 'mr2' : ''
-    icon.innerHTML = emojify.replace(data.emoji)
+    icon.innerHTML = data.emoji ? `<span class='mr2'>${emojify.replace(data.emoji)}</span>` : ''
+  })
+
   petRef.once('child_removed').then(() => {
     alert('It seems that your pet has been deleted. You can recreate it using the app.')
     logout()
@@ -98,15 +99,15 @@ function fetchData() {
 }
 
 function sortActivitiesByDay(array) {
-  var sortedArray = array.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-  var todayArray = sortedArray.filter(child => {
-    var today = new Date()
-    var childDate = new Date(child.date)
+  const sortedArray = array.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  const todayArray = sortedArray.filter(child => {
+    const today = new Date()
+    const childDate = new Date(child.date)
     return childDate.setHours(0,0,0,0) === today.setHours(0,0,0,0)
   })
-  var yesterdayArray = sortedArray.filter(child => {
-    var yesterday = new Date(Date.now() - 86400000)
-    var childDate = new Date(child.date)
+  const yesterdayArray = sortedArray.filter(child => {
+    const yesterday = new Date(Date.now() - 86400000)
+    const childDate = new Date(child.date)
     return childDate.setHours(0,0,0,0) === yesterday.setHours(0,0,0,0)
   })
   todayArray.length === 0 ? showEmptyMessage('today') : hideLoadingMessage('today')
@@ -120,17 +121,15 @@ function sortActivitiesByDay(array) {
 }
 
 function addActivityElement(date, type, id) {
-  var container = document.getElementById(id + '-list')
-  var activity = document.createElement('div')
-  var date = new Date(date)
-  var options = { hour12: false, hour: 'numeric', minute: 'numeric' }
-  var timeString = date.toLocaleTimeString(language, options)
-  var emoji = emojify.replace(type.toString().replace(/\,/g,''))
-  activity.className = 'pv3 flex items-center'
-  activity.innerHTML = '<div class="time w3"></div><div class="emojis"></div>'
-  activity.getElementsByClassName('time')[0].innerText = timeString
-  activity.getElementsByClassName('emojis')[0].innerHTML = emoji
-  container.appendChild(activity)
+  const container = document.getElementById(id + '-list')
+  const options = { hour12: false, hour: 'numeric', minute: 'numeric' }
+  const time = new Date(date).toLocaleTimeString(language, options)
+  const emoji = emojify.replace(type.toString().replace(/\,/g,''))
+  const test = `<div class='pv3 flex items-center'>
+    <div class='time w3'>${time}</div>
+    <div class='emojis'>${emoji}</div>
+  </div>`
+  container.innerHTML += test
 }
 
 function clearActivities() {
@@ -149,12 +148,12 @@ function showContent() {
 }
 
 function hideLoadingMessage(id) {
-  var container = document.getElementById(id)
+  const container = document.getElementById(id)
   container.getElementsByClassName('spinner-container')[0].classList.add('dn')
 }
 
 function showEmptyMessage(id) {
-  var container = document.getElementById(id)
+  const container = document.getElementById(id)
   container.getElementsByClassName('spinner-container')[0].classList.remove('dn')
   container.getElementsByClassName('spinner-image')[0].classList.add('dn')
   container.getElementsByClassName('spinner-text')[0].innerText = 'No activities'
