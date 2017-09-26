@@ -86,10 +86,10 @@ function fetchData() {
 
   petRef.once('value').then(snapshot => {
     const data = snapshot.val()
-    const name = document.getElementById('name')
-    const icon = document.getElementById('icon')
-    name.innerText = data.name
-    icon.innerHTML = data.emoji ? `<span class='mr2'>${emojify.replace(data.emoji)}</span>` : ''
+    const header = document.getElementById('header')
+    const replacer = (emoji, name) => {return `<div class='emoji emoji-${name} mr2' title='${emoji}'></div>`}
+    const content = `${emojify.replace(data.emoji, replacer)}<h2 class='f3 mv0'>${data.name}</h2>`
+    header.insertAdjacentHTML('afterbegin', content)
   })
 
   petRef.once('child_removed').then(() => {
