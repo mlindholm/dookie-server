@@ -8,6 +8,10 @@
       {
         "source": "**",
         "destination": "/index.html"
+      },
+      {
+        "source": "app.dookie.me/**",
+        "destination": "/app/**"
       }
     ]
   }
