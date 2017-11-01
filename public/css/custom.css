@@ -1,0 +1,45 @@
+/*Tachyon*/
+
+.brand-blue {
+  color: #1e88e5;
+}
+
+.brand-blue:hover {
+  color: #1976d2;
+}
+
+.bg-brand-blue {
+  background-color: #1e88e5;
+}
+
+.bg-brand-blue:hover {
+  background-color: #1976d2;
+}
+
+/*Marketing*/
+
+.hero {
+  background-image: url(../img/landscape.png);
+  background-position: bottom;
+  background-repeat: repeat-x;
+  background-size: auto 50%;
+}
+
+@media screen and (max-width: 60em) and (min-width: 30em) {
+  .hero {
+    background-size: auto 37.5%;
+  }
+}
+
+@media screen and (max-width: 30em){
+  .hero {
+    background-size: auto 25%;
+  }
+}
+
+/*Misc*/
+
+a.link:focus,
+input[type=submit]:focus {
+  outline: 0
+}

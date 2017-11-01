@@ -6,9 +6,10 @@
     <title>Dookie - Web app</title>
     <meta name="description" content="Use the web app to keep track of your pet’s eating & walking habits.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tachyons/4.8.1/tachyons.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/css/basic/emojify.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/emojify.js/1.1.0/css/data-uri/emojify.min.css" />
+    <link rel="stylesheet" href="../css/normalize.min.css"/>
+    <link rel="stylesheet" href="../css/tachyons.min.css"/>
+    <link rel="stylesheet" href="../css/emojify.min.css"/>
+    <link rel="stylesheet" href="../css/custom.css"/>
   </head>
   <body class="sans-serif dark-gray lh-title">
     <div id="logged-out" class="dn">
@@ -18,20 +19,20 @@
         <div class="mv4">
         <form accept-charset="utf-8" onsubmit="return false">
           <input type="text" name="petId" id="inputPetId" class="tc pa2 input-reset ba b--moon-gray lh-copy bg-white w-100 br2" placeholder="The pet‘s ID, e.g. -JhLeOlGIEjaIOFHR0xd">
-          <input class="mt3 pa2 lh-copy input-reset ba b--transparent bg-blue white dim pointer f5 fw6 br2 w-100" type="submit" value="Log in" onclick="login()">
+          <input class="mt3 pa2 lh-copy input-reset ba b--transparent bg-brand-blue white pointer f5 fw6 br2 w-100" type="submit" value="Log in" onclick="login()">
         </form>
         </div>
         <p class="f6 silver lh-copy">
           Tip: log in using the <em>web share link</em>, you‘ll find it in the app settings or in the join pet email
-          <a href="/" class="fw5 db mt2 pa2 link dim blue">Get the app</a>
+          <a href="/" class="fw5 db mt2 pa2 link brand-blue outline-0">Get the app</a>
         </p>
       </div>
     </div>
     <div id="logged-in" class="dn">
       <header class="bb b--light-gray">
         <div id="header" class="flex items-center pa3 mw6 center">
-          <a class="pointer f6 link dim pa2 silver ml-auto nowrap" onclick="logout()">Log out</a>
-          <a href="/" class="f6 fw5 link dim pa2 blue nowrap">Get the app</a>
+          <a class="pointer f6 link pa2 silver ml-auto nowrap outline-0" onclick="logout()">Log out</a>
+          <a href="/" class="f6 fw5 link pa2 brand-blue nowrap outline-0">Get the app</a>
         </div>
       </header>
       <section id="content" class="pa3 mw6 center">
@@ -54,10 +55,10 @@
       </section>
     </div>
     <footer class="f6 silver tc pv4">
-      <a href="http://mathiaslindholm.com/" class="link silver pa1">&copy; <script>document.write(new Date().getFullYear())</script> Mathias Lindholm</a>
-      <a href="javascript:location='mailto:\u006d\u0061\u0074\u0068\u0069\u0061\u0073\u002e\u006c\u0069\u006e\u0064\u0068\u006f\u006c\u006d\u0040\u0067\u006d\u0061\u0069\u006c\u002e\u0063\u006f\u006d?subject=Dookie';void 0" class="link silver pa1">Contact</a>
-      <a href="/legal.html" class="link silver pa1">Legal</a>
-      <a href="/" class="link silver pa1">Get&nbsp;the&nbsp;app</a>
+      <a href="http://mathiaslindholm.com/" class="link silver pa2 outline-0">&copy; <script>document.write(new Date().getFullYear())</script> Mathias Lindholm</a>
+      <a href="javascript:location='mailto:\u006d\u0061\u0074\u0068\u0069\u0061\u0073\u002e\u006c\u0069\u006e\u0064\u0068\u006f\u006c\u006d\u0040\u0067\u006d\u0061\u0069\u006c\u002e\u0063\u006f\u006d?subject=Dookie';void 0" class="link silver pa2 outline-0">Contact</a>
+      <a href="/legal.html" class="link silver pa2 outline-0">Legal</a>
+      <a href="/" class="link silver pa2 outline-0">Get&nbsp;the&nbsp;app</a>
     </footer>
     <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-app.js"></script>
