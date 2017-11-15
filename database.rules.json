@@ -2,11 +2,6 @@
   "rules": {
     ".read": false,
     ".write": false,
-    "$uid": {
-      ".read": true,
-      ".write": "auth != null",
-      ".validate": "$uid.length == 20"
-    },
     "activities": {
       ".read": true,
       ".write": "auth != null",
