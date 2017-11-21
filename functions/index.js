@@ -29,7 +29,7 @@ exports.daily_job =
       snapshot.forEach(child => {
         var now = Date.now()
         var date = Date.parse(child.val().date)
-        if (now - date > 24 * 60 * 60 * 1000) {
+        if (now - date > 40 * 60 * 60 * 1000) {
          toRemove[child.key] = null
         }
       })
