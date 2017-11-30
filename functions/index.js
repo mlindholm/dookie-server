@@ -16,11 +16,6 @@ var functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
-exports.hourly_job =
-  functions.pubsub.topic('hourly-tick').onPublish((event) => {
-    console.log("This job is ran every hour")
-  });
-
 exports.daily_job =
   functions.pubsub.topic('daily-tick').onPublish((event) => {
     const activitiesRef = admin.database().ref('activities')
