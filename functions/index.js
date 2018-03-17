@@ -12,23 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-var functions = require('firebase-functions');
-const admin = require('firebase-admin');
-admin.initializeApp(functions.config().firebase);
+// var functions = require('firebase-functions');
+// const admin = require('firebase-admin');
+// admin.initializeApp(functions.config().firebase);
 
-exports.daily_job =
-  functions.pubsub.topic('daily-tick').onPublish((event) => {
-    const activitiesRef = admin.database().ref('activities')
-    return activitiesRef.once('value').then(snapshot => {
-      var toRemove = {}
-      snapshot.forEach(child => {
-        var now = Date.now()
-        var date = Date.parse(child.val().date)
-        if (now - date > 40 * 60 * 60 * 1000) {
-         toRemove[child.key] = null
-        }
-      })
-      console.log("Daily cleanup, old activities removed: ", Object.keys(toRemove).length)
-      return activitiesRef.update(toRemove)
-    })
-  });
+// exports.daily_job =
+//   functions.pubsub.topic('daily-tick').onPublish((event) => {
+//     const activitiesRef = admin.database().ref('activities')
+//     return activitiesRef.once('value').then(snapshot => {
+//       var toRemove = {}
+//       snapshot.forEach(child => {
+//         var now = Date.now()
+//         var date = Date.parse(child.val().date)
+//         if (now - date > 40 * 60 * 60 * 1000) {
+//          toRemove[child.key] = null
+//         }
+//       })
+//       console.log("Daily cleanup, old activities removed: ", Object.keys(toRemove).length)
+//       return activitiesRef.update(toRemove)
+//     })
+//   });
